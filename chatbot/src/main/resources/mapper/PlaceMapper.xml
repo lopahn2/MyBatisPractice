@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.chatbot.mapper.PlaceMapper">
+    <resultMap id="PlaceResultMap" type="com.example.chatbot.model.Place">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="location" column="location"/>
+        <result property="rating" column="rating"/>
+    </resultMap>
+
+    <select id="getPlaceById" resultMap="PlaceResultMap">
+        SELECT * FROM Place WHERE id = #{id}
+    </select>
+
+    <select id="getAllPlaces" resultMap="PlaceResultMap">
+        SELECT * FROM Place
+    </select>
+
+    <insert id="insertPlace" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Place(name, type, location, rating)
+        VALUES(#{name}, #{type}, #{location}, #{rating})
+    </insert>
+
+    <update id="updatePlace">
+        UPDATE Place SET
+                         name=#{name},
+                         type=#{type},
+                         location=#{location},
+                         rating=#{rating}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deletePlace">
+        DELETE FROM Place WHERE id = #{id}
+    </delete>
+</mapper>
